@@ -24,34 +24,25 @@ class Submit extends Action
 
     public function execute()
     {
-        // Retrieve form data from POST
         $postData = $this->getRequest()->getPostValue();
 
-        if ($postData) {
+        if (!empty($postData)) {
             try {
-                // Save form data to the database
                 $formData = $this->formDataFactory->create();
-                $formData->setEmail($postData['email'])
-                         ->setFirstName($postData['first_name'])
-                         ->setLastName($postData['last_name'])
-                         ->setSchoolName($postData['school_name']);
-                
+                $formData->setData([
+                    'email' => $postData['email'],
+                    'first_name' => $postData['first_name'],
+                    'last_name' => $postData['last_name'],
+                    'school_name' => $postData['school_name'],
+                ]);
                 $formData->save();
 
-                // Show success message
-                $this->messageManager->addSuccessMessage(__('Form data saved successfully.'));
-                
-                // Redirect to the form page after saving
-                return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)
-                                           ->setPath('formfetch/form/index');
+                $this->messageManager->addSuccessMessage(__('Form data has been saved successfully.'));
             } catch (\Exception $e) {
-                // Show error message if something goes wrong
-                $this->messageManager->addErrorMessage(__('Error occurred: %1', $e->getMessage()));
+                $this->messageManager->addErrorMessage(__('Unable to save form data. Error: %1', $e->getMessage()));
             }
         }
 
-        // Redirect back if no data is posted
-        return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)
-                                   ->setPath('formfetch/form/index');
+        return $this->_redirect('*/*/index'); // Redirect to the form page or another page
     }
 }
