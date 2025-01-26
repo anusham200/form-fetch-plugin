@@ -4,7 +4,7 @@
         <add id="Custom_FormFetchPlugin::formfetch"
              title="Form Fetch Plugin"
              module="Custom_FormFetchPlugin"
-             sortOrder="52"
+             sortOrder="10"
              action="formfetch/form/index"
              resource="Custom_FormFetchPlugin::formfetch" />
     </menu>
