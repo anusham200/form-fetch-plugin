@@ -1,4 +1,3 @@
-
 <?php
 namespace Custom\FormFetchPlugin\Controller\Adminhtml\Form;
 
