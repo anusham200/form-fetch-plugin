@@ -1,0 +1,12 @@
+
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Registering the ResourceModel for the FormData model -->
+    <type name="Custom\FormFetchPlugin\Model\FormData">
+        <arguments>
+            <argument name="resourceModel" xsi:type="string">Custom\FormFetchPlugin\Model\ResourceModel\FormData</argument>
+        </arguments>
+    </type>
+
+    <!-- Add other dependencies here if needed -->
+</config>
