@@ -1,0 +1,34 @@
+{
+    "name": "custom/form-fetch-plugin",
+    "description": "This is a form Fetching Plugin.",
+    
+
+    "type": "magento2-module",
+    "version": "1.0.0",
+     "license": [
+        "Commercial"
+    ],
+     "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Custom\\FormFetchPlugin\\": ""
+        }
+    },
+    "authors": [
+        {
+            "name": "Anusha",
+            "homepage": "https://www.miniorange.com/",
+            "email": "formsupport@xecurify.com"
+        }
+    ],
+    "support": {
+        "email": "formsupport@xecurify.com"
+    },
+    "require": {
+      "php": "~6|~7|~8"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+
+  
+}
