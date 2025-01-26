@@ -1,9 +1,11 @@
+
 <?php
 namespace Custom\FormFetchPlugin\Controller\Adminhtml\Form;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\App\ObjectManager;
 use Custom\FormFetchPlugin\Model\FormDataFactory;
 
 class Submit extends Action
@@ -24,7 +26,6 @@ class Submit extends Action
     public function execute()
     {
         $postData = $this->getRequest()->getPostValue();
-        $customerId = $this->getRequest()->getParam('id'); // Customer ID
 
         if (!empty($postData)) {
             try {
@@ -43,6 +44,6 @@ class Submit extends Action
             }
         }
 
-        return $this->resultRedirectFactory->create()->setPath('customer/index/edit', ['id' => $customerId]);
+        return $this->_redirect('*/*/index'); // Redirect to the form page or another page
     }
 }
