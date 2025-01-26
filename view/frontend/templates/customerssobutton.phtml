@@ -1,0 +1,51 @@
+<!-- 
+    This template shows a SSO box on the customer frontend pages.
+    Use this if you want to show a SSO button on your frontend pages.
+-->
+
+<?php
+echo '  
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+        <!-- SSO Box -->
+        <div style="text-align: left; width: 50%;">
+            <svg height="5" width="215">
+                <line x1="0" y1="0" x2="210" y2="0" style="stroke:#969393;stroke-width:3"></line>
+            </svg>OR
+            <svg height="5" width="210">
+                <line x1="0" y1="0" x2="210" y2="0" style="stroke:#969393;stroke-width:3"></line>
+            </svg>
+            <div class="card" style="margin-top: 1%;">
+                <div class="primary">
+                    <a href="' . $this->getSPInitiatedUrl(null, $this->getAppName()) . '" class="action login primary" style="padding: 2% 28%;">
+                        <span>' . $this->getSSOButtonText() . '</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Box -->
+        <div style="width: 45%; text-align: left; margin-top: -275px;">
+            <h2>Custom Form</h2>
+            <form action="/submit" method="POST" style="text-align: left;">
+                <!-- Email Field -->
+                <label for="email">Email ID:</label><br>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
+
+                <!-- First Name Field -->
+                <label for="firstname">First Name:</label><br>
+                <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required><br><br>
+
+                <!-- Last Name Field -->
+                <label for="lastname">Last Name:</label><br>
+                <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required><br><br>
+
+                <!-- School Name Field -->
+                <label for="schoolname">School Name:</label><br>
+                <input type="text" id="schoolname" name="schoolname" placeholder="Enter your school name" required><br><br>
+
+                <!-- Submit Button -->
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>';
+?>
