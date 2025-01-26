@@ -1,8 +1,11 @@
-<menu>
-    <add id="Custom_FormFetchPlugin::formfetch"
-         title="Form Fetch Plugin"
-         module="Custom_FormFetchPlugin"
-         sortOrder="52"
-         action="customer/index/edit"
-         resource="Custom_FormFetchPlugin::formfetch" />
-</menu>
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Menu/etc/menu.xsd">
+    <menu>
+        <add id="Custom_FormFetchPlugin::formfetch"
+             title="Form Fetch Plugin"
+             module="Custom_FormFetchPlugin"
+             sortOrder="52"
+             action="formfetch/form/index"
+             resource="Custom_FormFetchPlugin::formfetch" />
+    </menu>
+</config>
