@@ -5,24 +5,6 @@
 
 <?php
 echo '  
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
-        <!-- SSO Box -->
-        <div style="text-align: left; width: 50%;">
-            <svg height="5" width="215">
-                <line x1="0" y1="0" x2="210" y2="0" style="stroke:#969393;stroke-width:3"></line>
-            </svg>OR
-            <svg height="5" width="210">
-                <line x1="0" y1="0" x2="210" y2="0" style="stroke:#969393;stroke-width:3"></line>
-            </svg>
-            <div class="card" style="margin-top: 1%;">
-                <div class="primary">
-                    <a href="' . $this->getSPInitiatedUrl(null, $this->getAppName()) . '" class="action login primary" style="padding: 2% 28%;">
-                        <span>' . $this->getSSOButtonText() . '</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
         <!-- Form Box -->
         <div style="width: 45%; text-align: left; margin-top: -275px;">
             <h2>Custom Form</h2>
