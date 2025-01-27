@@ -14,20 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // For now, we assume the data is saved successfully
     $successMessage = "Data Saved Successfully";
 }
-
-echo '  
+            echo '  
     <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
     
         <!-- Form Box -->
-        <div style="width: 50%; text-align: left; margin-top: -310px; margin-left: auto;">
-            <h2>Custom Form</h2>';
-
-            // Display success message if available
-            if (!empty($successMessage)) {
-                echo '<p style="color: green; font-weight: bold;">' . $successMessage . '</p>';
-            }
-
-            echo '<form action="" method="POST" style="text-align: left;">
+        <div style="width: 50%; text-align: left; margin-top: -310px;margin-left: auto;">
+            <h2>Custom Form</h2>
+            <form action="/submit" method="POST" style="text-align: left;">
                 <!-- Email Field -->
                 <label for="email">Email ID:</label><br>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
@@ -50,3 +43,4 @@ echo '
         </div>
     </div>';
 ?>
+
