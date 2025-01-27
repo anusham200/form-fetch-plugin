@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="form_fetch_plugin_data" resource="default" engine="innodb" comment="Form Fetch Plugin Data">
-        <!-- Primary Key - Email -->
+        <!-- Primary Key -->
         <column xsi:type="varchar" name="email" nullable="false" length="255" comment="Email (Primary Key)"/>
         
         <!-- Other Columns -->
         <column xsi:type="varchar" name="first_name" nullable="false" length="255" comment="First Name"/>
         <column xsi:type="varchar" name="last_name" nullable="false" length="255" comment="Last Name"/>
         <column xsi:type="varchar" name="school_name" nullable="false" length="255" comment="School Name"/>
-
-        <!-- Optional Timestamp Columns (created_at, updated_at) -->
+        
+        <!-- Timestamp Columns -->
         <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
-        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="CURRENT_TIMESTAMP" comment="Update Time"/>
 
         <!-- Define Primary Key -->
         <constraint xsi:type="primary" referenceId="PRIMARY">
