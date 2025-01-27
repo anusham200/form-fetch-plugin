@@ -3,7 +3,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Custom_FormFetchPlugin::formfetch" title="Form Fetch Plugin" />
+                <resource id="Custom_FormFetchPlugin::form_submit" title="Form Fetch Plugin" />
             </resource>
         </resources>
     </acl>
