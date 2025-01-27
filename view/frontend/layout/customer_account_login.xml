@@ -3,8 +3,7 @@
 	  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="customer.login.container">
-            <block class="Custom\Form\Block\Form" 
-                    name="custom.form.customer.link" 
+            <block   name="custom.form.customer.link" 
                     template="customerssobutton.phtml" />
         </referenceContainer>
     </body>
