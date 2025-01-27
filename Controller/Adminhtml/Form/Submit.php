@@ -35,25 +35,31 @@ class Submit extends Action
         // Check if data is not empty
         if (!empty($postData)) {
             try {
+                // Validate form data (for example, check if email is valid)
+                if (!filter_var($postData['email'], FILTER_VALIDATE_EMAIL)) {
+                    throw new \Magento\Framework\Exception\LocalizedException(__('Invalid email address.'));
+                }
+
                 // Create a new instance of the model
                 $formData = $this->formDataFactory->create();
 
                 // Set the data (ensure keys match the form's input names)
-                $formData->setData([
-                    'email' => $postData['email'],
-                    'first_name' => $postData['firstname'], // Adjusted key to match the form field
-                    'last_name' => $postData['lastname'],   // Adjusted key to match the form field
-                    'school_name' => $postData['schoolname'], // Adjusted key to match the form field
-                ]);
+                $formData->setEmail($postData['email']);
+                $formData->setFirstName($postData['firstname']);
+                $formData->setLastName($postData['lastname']);
+                $formData->setSchoolName($postData['schoolname']);
 
                 // Save the data to the database
                 $formData->save();
 
                 // Add success message
                 $this->messageManager->addSuccessMessage(__('Form data has been saved successfully.'));
-            } catch (\Exception $e) {
-                // Add error message
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                // Add error message for validation or other issues
                 $this->messageManager->addErrorMessage(__('Unable to save form data. Error: %1', $e->getMessage()));
+            } catch (\Exception $e) {
+                // Catch any other exceptions
+                $this->messageManager->addErrorMessage(__('An unexpected error occurred. Please try again later.'));
             }
         } else {
             // Add warning message if form data is empty
@@ -61,6 +67,6 @@ class Submit extends Action
         }
 
         // Redirect back to the form or another page
-        return $this->_redirect('formfetch/form/index');
+        return $this->_redirect('*/*/index'); // You can change this URL as needed
     }
 }
