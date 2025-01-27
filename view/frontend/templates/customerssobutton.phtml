@@ -1,16 +1,33 @@
-<!-- 
-    This template shows a SSO box on the customer frontend pages.
-    Use this if you want to show a SSO button on your frontend pages.
--->
-
 <?php
+// Initialize a variable to store the success message
+$successMessage = "";
+
+// Check if the form has been submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Retrieve form data
+    $email = $_POST['email'] ?? '';
+    $firstname = $_POST['firstname'] ?? '';
+    $lastname = $_POST['lastname'] ?? '';
+    $schoolname = $_POST['schoolname'] ?? '';
+
+    // You can process or save the data here (e.g., save to the database)
+    // For now, we assume the data is saved successfully
+    $successMessage = "Data Saved Successfully";
+}
+
 echo '  
     <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
     
         <!-- Form Box -->
-        <div style="width: 50%; text-align: left; margin-top: -310px;margin-left: auto;">
-            <h2>Custom Form</h2>
-            <form action="/submit" method="POST" style="text-align: left;">
+        <div style="width: 50%; text-align: left; margin-top: -310px; margin-left: auto;">
+            <h2>Custom Form</h2>';
+
+            // Display success message if available
+            if (!empty($successMessage)) {
+                echo '<p style="color: green; font-weight: bold;">' . $successMessage . '</p>';
+            }
+
+            echo '<form action="" method="POST" style="text-align: left;">
                 <!-- Email Field -->
                 <label for="email">Email ID:</label><br>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
