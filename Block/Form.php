@@ -1,6 +1,6 @@
 <?php
 
-namespace Custom\Block;
+namespace Custom\form-fetch-plugin\Block\Form;
 
 use Magento\Framework\View\Element\Template;
 
