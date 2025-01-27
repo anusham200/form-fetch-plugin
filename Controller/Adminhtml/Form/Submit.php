@@ -4,6 +4,8 @@ use Psr\Log\LoggerInterface;
 
 class Submit extends Action
 {
+
+    const ADMIN_RESOURCE = 'Custom_FormFetchPlugin::form_submit';
     protected $formDataFactory;
     protected $logger;
 
