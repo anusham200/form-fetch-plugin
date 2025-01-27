@@ -1,6 +1,6 @@
 <?php
 
-namespace Custom/Form/Block/Form.php;
+namespace Custom/Block/Form.php;
 
 use Magento\Framework\View\Element\Template;
 
