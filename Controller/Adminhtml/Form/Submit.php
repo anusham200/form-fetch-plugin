@@ -1,24 +1,27 @@
-<?php
-namespace Custom\FormFetchPlugin\Controller\Adminhtml\Form;
-
-use Magento\Backend\App\Action;
-use Custom\FormFetchPlugin\Model\FormDataFactory;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\Message\ManagerInterface;
+use Psr\Log\LoggerInterface;
 
 class Submit extends Action
 {
     protected $formDataFactory;
+    protected $logger;
 
     public function __construct(
-        Action\Context $context,
-        FormDataFactory $formDataFactory
+        Context $context,
+        FormDataFactory $formDataFactory,
+        LoggerInterface $logger
     ) {
         $this->formDataFactory = $formDataFactory;
+        $this->logger = $logger;
         parent::__construct($context);
     }
 
     public function execute()
     {
         $postData = $this->getRequest()->getPostValue(); // Get POST data from the form submission
+
+        $this->logger->debug('Form data received: ', $postData); // Log the data
 
         if (!empty($postData)) {
             try {
@@ -37,7 +40,8 @@ class Submit extends Action
                 // Success message
                 $this->messageManager->addSuccessMessage(__('Form data has been saved successfully.'));
             } catch (\Exception $e) {
-                // Error message
+                // Log error and show error message
+                $this->logger->error('Error saving form data: ' . $e->getMessage());
                 $this->messageManager->addErrorMessage(__('Unable to save form data. Error: %1', $e->getMessage()));
             }
         } else {
