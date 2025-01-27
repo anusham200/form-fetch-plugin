@@ -2,8 +2,6 @@
 namespace Custom\FormFetchPlugin\Model;
 
 use Magento\Framework\Model\AbstractModel;
-use Magento\Framework\Model\Context;
-use Magento\Framework\Registry;
 use Magento\Framework\DataObject\IdentityInterface;
 use Custom\FormFetchPlugin\Model\ResourceModel\FormData as ResourceModel;
 
