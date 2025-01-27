@@ -10,6 +10,9 @@ class FormData extends AbstractModel implements IdentityInterface
     const CACHE_TAG = 'form_fetch_plugin_data';
 
     protected $_idFieldName = 'email'; // Primary key is email
+    protected $_model = 'Custom\form-fetch-plugin\Model\ResourceModel\FormData';  // Your resource model
+
+    protected $_isObjectNew = true; // To handle save
     protected $_cacheTag = self::CACHE_TAG;
     protected $_resourceModel = ResourceModel\FormData::class;
 
