@@ -50,7 +50,32 @@ class Index extends Action
 
                 // Add success message
                 $this->messageManager->addSuccessMessage(__('Data has been saved successfully.'));
-            } catch (\Exception $e) {
+            } elseif (isset($params['fetch'])) {
+                // Handle fetch logic
+                if (empty($params['fetch_email'])) {
+                    throw new \Exception(__('Email is required to fetch details.'));
+                }
+
+                // Fetch data based on email
+                $fetchedData = $this->fetchFromDatabase($params['fetch_email']);
+                if (!$fetchedData) {
+                    throw new \Exception(__('No data found for the provided email.'));
+                }
+
+                $this->messageManager->addSuccessMessage(__('Data fetched successfully.'));
+            }
+        } catch (\Exception $e) {
+            // Add error message
+            $this->messageManager->addErrorMessage($e->getMessage());
+        }
+    }
+
+    // Pass fetched data to the result page and block
+    $resultPage = $this->resultPageFactory->create();
+    $block = $resultPage->getLayout()->getBlock('formfetch_form_index');
+    if ($block) {
+        $block->setFetchedData($fetchedData); // Here, you use setFetchedData() to store the fetched data
+    }catch (\Exception $e) {
                 // Add error message
                 $this->messageManager->addErrorMessage($e->getMessage());
             }
