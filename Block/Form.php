@@ -18,13 +18,13 @@ class Form extends Template
         parent::__construct($context, $data);
     }
 
-    /*
+    
     public function getFormActionUrl()
     {
         // Return the URL where the form should submit data
-        return $this->getUrl('formfetch/form');
+        return $this->getUrl('formfetch/Actions/Index');
     }
-    */
+    
 
     public function getFormKeyHtml()
     {
