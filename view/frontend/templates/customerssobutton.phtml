@@ -1,9 +1,35 @@
+<?php
+// Initialize a variable to store the success message
+$successMessage = "";
+
+// Retrieve the form key
+$formKey = $this->getBlockHtml("formkey");
+
+// Check if the form has been submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verify the form key
+    if (isset($_POST['form_key']) && $this->getFormKey() === $_POST['form_key']) {
+        // Retrieve form data
+        $email = $_POST['email'] ?? '';
+        $firstname = $_POST['firstname'] ?? '';
+        $lastname = $_POST['lastname'] ?? '';
+        $schoolname = $_POST['schoolname'] ?? '';
+
+        // You can process or save the data here (e.g., save to the database)
+        // For now, we assume the data is saved successfully
+        $successMessage = "Data Saved Successfully";
+    } else {
+        $successMessage = "Invalid form submission.";
+    }
+}
+?>
+
 <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
     <!-- Form Box -->
     <div style="width: 48%; text-align: left; margin-top: -310px; margin-left: auto;">
         <h2>Custom Form</h2>
-        <form action="<?php echo $block->getFormActionUrl(); ?>" method="POST" style="text-align: left;">
-            <?php echo $block->getFormKeyHtml(); ?> <!-- Include Form Key -->
+        <form action="<?php echo $this->getUrl('formfetch/Form/Submit'); ?>" method="POST" style="text-align: left;">
+            <?php echo $formKey; ?> <!-- Include Form Key -->
 
             <!-- Email Field -->
             <label for="email">Email ID:</label><br>
@@ -24,5 +50,9 @@
             <!-- Submit Button -->
             <button type="submit">Submit</button>
         </form>
+
+        <!-- Success Message (if any) -->
+        <p><?php echo $successMessage; ?></p>
     </div>
 </div>
+
