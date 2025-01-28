@@ -31,8 +31,17 @@ class Form extends Template
     }
 
     public function getSuccessMessage()
-    {
-        // If you want to show success message dynamically in the frontend.
-        return $this->messageManager->getMessages()->getLastAddedMessage()->getText();
+{
+    $messages = $this->messageManager->getMessages()->getItems();
+
+    // Loop through messages and find the success message
+    foreach ($messages as $message) {
+        if ($message->getType() == \Magento\Framework\Message\MessageInterface::TYPE_SUCCESS) {
+            return $message->getText();
+        }
     }
+
+    return ''; // Return empty string if no success message found
+}
+
 }
