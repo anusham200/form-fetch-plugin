@@ -2,55 +2,95 @@
 
 namespace Custom\FormFetchPlugin\Controller\Actions;
 
-
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\Action\Context;
+use Magento\Backend\App\Action;
+use Magento\Framework\View\Result\PageFactory;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface;
-use Custom\FormFetchPlugin\Model\FormDataFactory;
+use Magento\Framework\App\ResourceConnection;
 
-class Submit extends Action
+class Index extends Action
 {
-    protected $formDataFactory;
+    protected $resultPageFactory;
+    protected $request;
     protected $messageManager;
+    protected $resource;
 
     public function __construct(
-        Context $context,
-        FormDataFactory $formDataFactory,
-        ManagerInterface $messageManager
+        Action\Context $context,
+        PageFactory $resultPageFactory,
+        RequestInterface $request,
+        ManagerInterface $messageManager,
+        ResourceConnection $resource
     ) {
         parent::__construct($context);
-        $this->formDataFactory = $formDataFactory;
+        $this->resultPageFactory = $resultPageFactory;
+        $this->request = $request;
         $this->messageManager = $messageManager;
+        $this->resource = $resource;
     }
 
     public function execute()
     {
-        // Retrieve form data from POST request
-        $postData = $this->getRequest()->getPostValue();
+        $fetchedData = null;
 
-        if (!empty($postData)) {
+        // Check if the request is POST
+        if ($this->getRequest()->isPost()) {
             try {
-                // Create an instance of the form data model
-                $formData = $this->formDataFactory->create();
+                // Retrieve POST parameters
+                $params = $this->request->getPostValue();
 
-                // Set form data values
-                $formData->setEmail($postData['email']);
-                $formData->setFirstName($postData['firstname']);
-                $formData->setLastName($postData['lastname']);
-                $formData->setSchoolName($postData['schoolname']);
+                // Validate required parameters
+                if (empty($params['email']) || empty($params['firstname']) || empty($params['lastname']) || empty($params['schoolname'])) {
+                    throw new \Exception(__('All fields are required.'));
+                }
 
-                // Save form data to the database
-                $formData->save();  // Ensure that this method correctly saves the data
+                // Save data to the database
+                $this->saveToDatabase($params);
 
-                // Add a success message
-                $this->messageManager->addSuccessMessage(__('Form data has been saved successfully.'));
+                // Add success message
+                $this->messageManager->addSuccessMessage(__('Data has been saved successfully.'));
             } catch (\Exception $e) {
-                // Log the error and add an error message
-                $this->messageManager->addErrorMessage(__('Unable to save form data.'));
+                // Add error message
+                $this->messageManager->addErrorMessage($e->getMessage());
             }
         }
 
-        // Redirect back to the form page after submission
-       // return $this->_redirect('*/*/');  // Replace with the correct redirect URL if needed
+        $resultPage = $this->resultPageFactory->create();
+        $resultPage->getConfig()->getTitle()->set(__('Form Fetch Plugin'));
+
+        return $resultPage;
+    }
+
+    /**
+     * Save data to the database
+     *
+     * @param array $params
+     * @throws \Exception
+     */
+    private function saveToDatabase($params)
+    {
+        $connection = $this->resource->getConnection();
+        $tableName = $this->resource->getTableName('form_fetch_plugin_data'); // Your table name
+
+        $data = [
+            'email' => $params['email'],
+            'firstname' => $params['firstname'],
+            'lastname' => $params['lastname'],
+            'schoolname' => $params['schoolname'],
+        ];
+
+        // Check if a record already exists
+        $existingRecord = $connection->fetchOne(
+            "SELECT COUNT(*) FROM $tableName WHERE email = :email",
+            ['email' => $params['email']]
+        );
+
+        if ($existingRecord) {
+            // Update record
+            $connection->update($tableName, $data, ['email = ?' => $params['email']]);
+        } else {
+            // Insert new record
+            $connection->insert($tableName, $data);
+        }
     }
 }
