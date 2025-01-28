@@ -39,7 +39,7 @@ class Submit extends Action
                 $formData->setSchoolName($postData['schoolname']);
 
                 // Save form data to the database
-                $formData->save();
+                $formData->save();  // Ensure that this method correctly saves the data
 
                 // Add a success message
                 $this->messageManager->addSuccessMessage(__('Form data has been saved successfully.'));
