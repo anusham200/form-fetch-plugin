@@ -5,7 +5,7 @@ namespace Custom\FormFetchPlugin\Block;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Data\Form\FormKey;
 
-class CustomersSOButton extends Template
+class Form extends Template
 {
     protected $formKey;
 
@@ -35,6 +35,6 @@ class CustomersSOButton extends Template
      */
     public function getFormActionUrl()
     {
-        return $this->getUrl('formfetch/Form/Submit'); // Adjust the route as needed
+        return $this->getUrl('formfetch/Form/Submit'); // Update the route if necessary
     }
 }
