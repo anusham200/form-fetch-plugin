@@ -50,7 +50,7 @@ class Submit extends Action
         }
 
         // Redirect back to the form page after submission
-        return $this->_redirect('*/*/');  // Replace with the correct redirect URL if needed
+       // return $this->_redirect('*/*/');  // Replace with the correct redirect URL if needed
     }
 }
 
