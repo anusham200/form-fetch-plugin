@@ -60,7 +60,7 @@ class Index extends Action
         $resultPage = $this->resultPageFactory->create();
 
         // Set the page title dynamically
-        $resultPage->getConfig()->getTitle()->set(__('Form Fetch Plugin'));
+        $resultPage->getConfig()->getTitle()->set(__('Frontend Form Fetch Plugin'));
 
         return $resultPage;
     }
