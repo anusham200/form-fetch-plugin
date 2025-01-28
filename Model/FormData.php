@@ -1,22 +1,23 @@
+<?php
+
 namespace Custom\FormFetchPlugin\Model;
 
 use Magento\Framework\Model\AbstractModel;
-use Custom\FormFetchPlugin\Model\ResourceModel\FormData as FormDataResource;
 
 class FormData extends AbstractModel
 {
-    protected $_idFieldName = 'email';  // Use primary key as email
-    protected $_table = 'form_fetch_plugin_data';  // The table name
+    protected $_idFieldName = 'email';  // Replace with your primary key field name
+    protected $_table = 'form_fetch_plugin_data';  // Define the database table name where data will be saved
 
-    protected $_resourceModel = FormDataResource::class;
+    protected $_dataModel = \Custom\FormFetchPlugin\Model\ResourceModel\FormData::class;
 
-    // Setters and Getters for the form fields
+    // Define getters and setters for your form data attributes
     public function getEmail() {
         return $this->_getData('email');
     }
 
     public function setEmail($email) {
-        return $this->setData('email', $email);
+        $this->setData('email', $email);
     }
 
     public function getFirstName() {
@@ -24,7 +25,7 @@ class FormData extends AbstractModel
     }
 
     public function setFirstName($firstname) {
-        return $this->setData('firstname', $firstname);
+        $this->setData('firstname', $firstname);
     }
 
     public function getLastName() {
@@ -32,7 +33,7 @@ class FormData extends AbstractModel
     }
 
     public function setLastName($lastname) {
-        return $this->setData('lastname', $lastname);
+        $this->setData('lastname', $lastname);
     }
 
     public function getSchoolName() {
@@ -40,7 +41,6 @@ class FormData extends AbstractModel
     }
 
     public function setSchoolName($schoolname) {
-        return $this->setData('schoolname', $schoolname);
+        $this->setData('schoolname', $schoolname);
     }
 }
-
