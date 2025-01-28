@@ -1,31 +1,24 @@
 <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
-    <!-- Form Box -->
     <div style="width: 48%; text-align: left; margin-top: -310px; margin-left: auto;">
         <h2>Custom Form</h2>
         <form method="post" action="<?php echo $block->getFormActionUrl(); ?>" style="text-align: left;">
             <?php echo $block->getFormKeyHtml(); ?> <!-- Include Form Key -->
 
-            <!-- Email Field -->
             <label for="email">Email ID:</label><br>
             <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
 
-            <!-- First Name Field -->
             <label for="firstname">First Name:</label><br>
             <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required><br><br>
 
-            <!-- Last Name Field -->
             <label for="lastname">Last Name:</label><br>
             <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required><br><br>
 
-            <!-- School Name Field -->
             <label for="schoolname">School Name:</label><br>
             <input type="text" id="schoolname" name="schoolname" placeholder="Enter your school name" required><br><br>
 
-            <!-- Submit Button -->
             <button type="submit">Submit</button>
         </form>
 
-        <!-- Success Message (if any) -->
         <p><?php echo $block->getSuccessMessage(); ?></p>
     </div>
 </div>
