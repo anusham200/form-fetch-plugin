@@ -1,70 +1,46 @@
 <?php
+
 namespace Custom\FormFetchPlugin\Model;
 
 use Magento\Framework\Model\AbstractModel;
-use Magento\Framework\DataObject\IdentityInterface;
-use Custom\FormFetchPlugin\Model\ResourceModel\FormData as ResourceModel;
 
-class FormData extends AbstractModel implements IdentityInterface
+class FormData extends AbstractModel
 {
-    const CACHE_TAG = 'form_fetch_plugin_data';
+    protected $_idFieldName = 'email';  // Replace with your primary key field name
+    protected $_table = 'form_fetch_plugin_data';  // Define the database table name where data will be saved
 
-    protected $_idFieldName = 'email'; // Primary key is email
-    protected $_model = 'Custom\form-fetch-plugin\Model\ResourceModel\FormData';  // Your resource model
+    protected $_dataModel = \Custom\FormFetchPlugin\Model\ResourceModel\FormData::class;
 
-    protected $_isObjectNew = true; // To handle save
-    protected $_cacheTag = self::CACHE_TAG;
-    protected $_resourceModel = ResourceModel\FormData::class;
-
-    protected $_fieldMapping = [
-        'email' => 'email',
-        'first_name' => 'first_name',
-        'last_name' => 'last_name',
-        'school_name' => 'school_name',
-    ];
-
-    protected $email;
-    protected $firstName;
-    protected $lastName;
-    protected $schoolName;
-
-    public function _construct()
-    {
-        parent::_construct();
-        $this->_init(ResourceModel\FormData::class);
+    // Define getters and setters for your form data attributes
+    public function getEmail() {
+        return $this->_getData('email');
     }
 
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
+    public function setEmail($email) {
+        $this->setData('email', $email);
     }
 
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-        return $this;
+    public function getFirstName() {
+        return $this->_getData('firstname');
     }
 
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-        return $this;
+    public function setFirstName($firstname) {
+        $this->setData('firstname', $firstname);
     }
 
-    public function setSchoolName($schoolName)
-    {
-        $this->schoolName = $schoolName;
-        return $this;
+    public function getLastName() {
+        return $this->_getData('lastname');
     }
 
-    public function getId()
-    {
-        return $this->email;
+    public function setLastName($lastname) {
+        $this->setData('lastname', $lastname);
     }
 
-    public function getIdentities()
-    {
-        return [self::CACHE_TAG . '_' . $this->getId()];
+    public function getSchoolName() {
+        return $this->_getData('schoolname');
+    }
+
+    public function setSchoolName($schoolname) {
+        $this->setData('schoolname', $schoolname);
     }
 }
