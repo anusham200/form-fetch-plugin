@@ -1,16 +1,22 @@
-use Magento\Framework\App\Action\Context;
+<?php
+
+namespace Custom\FormFetchPlugin\Controller\Adminhtml\Form;
+
+use Magento\Backend\App\Action;
+use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\Message\ManagerInterface;
 use Psr\Log\LoggerInterface;
+use Custom\FormFetchPlugin\Model\FormDataFactory;
 
 class Submit extends Action
 {
-
     const ADMIN_RESOURCE = 'Custom_FormFetchPlugin::form_submit';
+
     protected $formDataFactory;
     protected $logger;
 
     public function __construct(
-        Context $context,
+        Action\Context $context,
         FormDataFactory $formDataFactory,
         LoggerInterface $logger
     ) {
@@ -21,28 +27,34 @@ class Submit extends Action
 
     public function execute()
     {
-        $postData = $this->getRequest()->getPostValue(); // Get POST data from the form submission
+        $postData = $this->getRequest()->getPostValue();
 
-        $this->logger->debug('Form data received: ', $postData); // Log the data
+        $this->logger->debug('Form data received: ', $postData);
 
         if (!empty($postData)) {
             try {
-                // Create a model instance
+                // Validate required fields
+                $email = $postData['email'] ?? null;
+                $firstname = $postData['firstname'] ?? null;
+                $lastname = $postData['lastname'] ?? null;
+                $schoolname = $postData['schoolname'] ?? null;
+
+                if (!$email || !$firstname || !$lastname || !$schoolname) {
+                    $this->messageManager->addErrorMessage(__('All fields are required.'));
+                    return $this->_redirect('formfetch/form/index');
+                }
+
+                // Create and save form data
                 $formData = $this->formDataFactory->create();
-                
-                // Set form data values
-                $formData->setEmail($postData['email']);
-                $formData->setFirstName($postData['firstname']);
-                $formData->setLastName($postData['lastname']);
-                $formData->setSchoolName($postData['schoolname']);
-                
-                // Save data to the database
+                $formData->setEmail($email);
+                $formData->setFirstName($firstname);
+                $formData->setLastName($lastname);
+                $formData->setSchoolName($schoolname);
+
                 $formData->save();
 
-                // Success message
                 $this->messageManager->addSuccessMessage(__('Form data has been saved successfully.'));
             } catch (\Exception $e) {
-                // Log error and show error message
                 $this->logger->error('Error saving form data: ' . $e->getMessage());
                 $this->messageManager->addErrorMessage(__('Unable to save form data. Error: %1', $e->getMessage()));
             }
