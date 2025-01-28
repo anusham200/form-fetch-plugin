@@ -2,7 +2,7 @@
 
 namespace Custom\FormFetchPlugin\Controller\Actions;
 
-use Magento\Backend\App\Action;
+use Magento\Framework\App\Action\Action;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface;
@@ -16,7 +16,7 @@ class Index extends Action
     protected $resource;
 
     public function __construct(
-        Action\Context $context,
+        \Magento\Framework\App\Action\Context $context,
         PageFactory $resultPageFactory,
         RequestInterface $request,
         ManagerInterface $messageManager,
@@ -31,6 +31,7 @@ class Index extends Action
 
     public function execute()
     {
+        // Initialize the fetched data variable
         $fetchedData = null;
 
         // Check if the request is POST
@@ -55,7 +56,10 @@ class Index extends Action
             }
         }
 
+        // Return the same page without redirect
         $resultPage = $this->resultPageFactory->create();
+
+        // Set the page title dynamically
         $resultPage->getConfig()->getTitle()->set(__('Form Fetch Plugin'));
 
         return $resultPage;
