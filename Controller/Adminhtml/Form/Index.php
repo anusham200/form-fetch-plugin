@@ -3,7 +3,7 @@
 namespace Custom\FormFetchPlugin\Controller\Adminhtml\Form;
 
 use Magento\Backend\App\Action;
-use Magento\Framework\App\Action\Context;
+use Magento\Backend\App\Action\Context;  // Use the correct Context here
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\Message\ManagerInterface;
 use Custom\FormFetchPlugin\Model\FormDataFactory;
@@ -15,7 +15,7 @@ class Index extends Action
     protected $messageManager;
 
     public function __construct(
-        Context $context,
+        Context $context,  // This is the correct backend Context
         PageFactory $resultPageFactory,
         FormDataFactory $formDataFactory,
         ManagerInterface $messageManager
