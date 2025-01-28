@@ -78,9 +78,9 @@ class Index extends Action
 
         $data = [
             'email' => $params['email'],
-            'firstname' => $params['firstname'],
-            'lastname' => $params['lastname'],
-            'schoolname' => $params['schoolname'],
+            'first_name' => $params['firstname'],
+            'last_name' => $params['lastname'],
+            'school_name' => $params['schoolname'],
         ];
 
         // Check if a record already exists
