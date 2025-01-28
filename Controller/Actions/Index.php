@@ -1,6 +1,7 @@
 <?php
 
-namespace Custom\FormFetchPlugin\Controller\Action;
+namespace Custom\FormFetchPlugin\Controller\Actions;
+
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
