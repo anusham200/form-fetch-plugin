@@ -21,7 +21,7 @@ class Form extends Template
     public function getFormActionUrl()
     {
         // Return the URL where the form should submit data
-        return $this->getUrl('formfetch/form/submit');
+        return $this->getUrl('formfetch/form');
     }
 
     public function getFormKeyHtml()
