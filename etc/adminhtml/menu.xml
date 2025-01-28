@@ -5,7 +5,7 @@
              title="Frontend Form Fetch Plugin"
              module="Custom_FormFetchPlugin"
              sortOrder="52"
-             action="formfetch/form/index"
+             action="formfetch/actions/index"
              resource="Custom_FormFetchPlugin::formfetch"
              class="item-formfetch" />
     </menu>
