@@ -1,36 +1,32 @@
 <?php
 
-namespace Custom\FormFetchPlugin\Controller\Adminhtml\Form;
+namespace Custom\FormFetchPlugin\Controller\Form;
 
-use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;  // Use the correct Context here
-use Magento\Framework\View\Result\PageFactory;
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
 use Magento\Framework\Message\ManagerInterface;
 use Custom\FormFetchPlugin\Model\FormDataFactory;
 
-class Index extends Action
+class Submit extends Action
 {
-    protected $resultPageFactory;
     protected $formDataFactory;
     protected $messageManager;
 
     public function __construct(
-        Context $context,  // This is the correct backend Context
-        PageFactory $resultPageFactory,
+        Context $context,
         FormDataFactory $formDataFactory,
         ManagerInterface $messageManager
     ) {
         parent::__construct($context);
-        $this->resultPageFactory = $resultPageFactory;
         $this->formDataFactory = $formDataFactory;
         $this->messageManager = $messageManager;
     }
 
     public function execute()
     {
-        // Handle form submission
+        // Retrieve form data from POST request
         $postData = $this->getRequest()->getPostValue();
-        
+
         if (!empty($postData)) {
             try {
                 // Create an instance of the form data model
@@ -53,10 +49,8 @@ class Index extends Action
             }
         }
 
-        // Render the form page
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->set(__('Form Fetch Plugin'));
-
-        return $resultPage;
+        // Redirect back to the form page after submission
+        return $this->_redirect('*/*/');  // Replace with the correct redirect URL if needed
     }
 }
+
