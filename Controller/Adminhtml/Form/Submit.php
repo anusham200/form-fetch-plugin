@@ -1,7 +1,7 @@
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Message\ManagerInterface;
 use Psr\Log\LoggerInterface;
-
+echo var_dump("Hello");
 class Submit extends Action
 {
 
@@ -21,6 +21,7 @@ class Submit extends Action
 
     public function execute()
     {
+        echo var_dump("Hello");
         $postData = $this->getRequest()->getPostValue(); // Get POST data from the form submission
 
         $this->logger->debug('Form data received: ', $postData); // Log the data
