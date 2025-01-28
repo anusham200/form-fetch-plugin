@@ -1,0 +1,14 @@
+
+<div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+    <div style="width: 48%; text-align: left; margin-top: -600px; margin-left: auto;">
+        
+        <form method="post" action="" style="text-align: left;">
+            <!-- Additional Email field for "Fetch" --><h3>Fetch Details</h3>
+            <label for="fetch_email">Fetch:</label><br>
+            <input type="email" id="fetch_email" name="fetch_email" placeholder="Enter email for fetch" style="border: 1px solid #ddd; padding: 8px; width: 100%;" required><br><br>
+            <button type="submit" style="background-color: rgb(0,105,169); color: white; border: none; padding: 10px 20px; cursor: pointer;">Fetch Details</button><br><br>
+        </form>
+
+        
+    </div>
+</div>
