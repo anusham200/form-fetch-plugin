@@ -1,7 +1,7 @@
 <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
     <div style="width: 48%; text-align: left; margin-top: -360px; margin-left: auto;">
         <h2>Custom Form</h2>
-        <form method="post" action="" style="text-align: left;">
+        <form method="post" action="<?php echo $block->getUrl('formfetch/form/submit') ?>" style="text-align: left;">
             <?php echo $block->getFormKeyHtml(); ?> <!-- Include Form Key -->
 
             <label for="email">Email ID:</label><br>
