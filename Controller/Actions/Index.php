@@ -42,7 +42,7 @@ class Index extends Action
 
             if (isset($params['submit'])) {
                 // Validate required parameters
-                if (empty($params['email']) || empty($params['first_name']) || empty($params['last_name']) || empty($params['school_name'])) {
+                if (empty($params['email']) || empty($params['firstname']) || empty($params['lastname']) || empty($params['schoolname'])) {
                     throw new \Exception(__('All fields are required.'));
                 }
 
