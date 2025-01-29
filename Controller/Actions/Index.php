@@ -59,10 +59,10 @@ class Index extends Action
                         throw new \Exception(__('No data found for the provided email.'));
                     }
 
-                    $message = __('Data fetched successfully.') . '<br>'
-                    . "Email: " . htmlspecialchars($fetchedData['email']) . "<br>"
-                    . "First Name: " . htmlspecialchars($fetchedData['first_name']) . "<br>"
-                    . "Last Name: " . htmlspecialchars($fetchedData['last_name']) . "<br>"
+                    $message = __('Data fetched successfully') . 'for'
+                    . "Email: " . htmlspecialchars($fetchedData['email']) . "->"
+                    . "First Name: " . htmlspecialchars($fetchedData['first_name']) . "->"
+                    . "Last Name: " . htmlspecialchars($fetchedData['last_name']) . "->"
                     . "School Name: " . htmlspecialchars($fetchedData['school_name']);
 
                 $this->messageManager->addSuccessMessage(__($message));
