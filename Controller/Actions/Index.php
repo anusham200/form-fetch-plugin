@@ -29,9 +29,9 @@ class Index extends Action
         $this->resource = $resource;
     }
 
-    public function execute()
-    {
-        // Fetch data for rendering in the view
+   public function execute()
+{
+    // Fetch data for rendering in the view
     $fetchedData = null;
 
     // Check if the request is POST
@@ -75,21 +75,15 @@ class Index extends Action
     $resultPage = $this->resultPageFactory->create();
     $block = $resultPage->getLayout()->getBlock('formfetch_form_index');
     if ($block) {
-        $block->setFetchedData($fetchedData); // Here, you use setFetchedData() to store the fetched data
-    }catch (\Exception $e) {
-                // Add error message
-                $this->messageManager->addErrorMessage($e->getMessage());
-            }
-        }
-
-        // Return the same page without redirect
-        $resultPage = $this->resultPageFactory->create();
-
-        // Set the page title dynamically
-        $resultPage->getConfig()->getTitle()->set(__('Frontend Form Fetch Plugin'));
-
-        return $resultPage;
+        $block->setFetchedData($fetchedData); // Pass fetched data to the block
     }
+
+    // Set the page title dynamically
+    $resultPage->getConfig()->getTitle()->set(__('Frontend Form Fetch Plugin'));
+
+    return $resultPage;
+}
+
 
     /**
      * Save data to the database
