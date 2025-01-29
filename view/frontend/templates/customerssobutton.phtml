@@ -1,7 +1,7 @@
 <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
     <div style="width: 48%; text-align: left; margin-top: -360px; margin-left: auto;">
         <h2>Custom Form</h2>
-        <form method="post" action="<?php echo $block->getFormActionUrl() ?>" style="text-align: left;">
+        <form method="post" action="<?php echo $block->getFormActionUrl(); ?>" style="text-align: left;">
             <?php echo $block->getFormKeyHtml(); ?> <!-- Include Form Key -->
 
             <label for="email">Email ID:</label><br>
@@ -17,7 +17,6 @@
             <input type="text" id="schoolname" name="schoolname" placeholder="Enter your school name" required><br><br>
 
             <button type="submit" name="submit" style="background-color: rgb(0,105,169); color: white; border: none; padding: 10px 20px; cursor: pointer;">Submit</button><br><br>
-
         </form>
 
         <p><?php echo $block->getSuccessMessage(); ?></p>
@@ -28,14 +27,12 @@
     <div style="width: 48%; text-align: left; margin-top: -25px; margin-left: auto;">
         
         <form method="post" action="<?php echo $block->getFetchUrl(); ?>" style="text-align: left;">
-            <!-- Additional Email field for "Fetch" -->
             <h3>Fetch Details</h3>
             <label for="fetch_email">Fetch:</label><br>
             <input type="email" id="fetch_email" name="fetch_email" placeholder="Enter email for fetch" style="border: 1px solid #ddd; padding: 8px; width: 100%;" required><br><br>
             
-            <!-- Add form key for CSRF protection -->
-            <input type="hidden" name="form_key" value="<?php echo $block->getFormKeyHtml(); ?>" />
-            
+            <?php echo $block->getFormKeyHtml(); ?> <!-- Corrected form key usage -->
+
             <button type="submit" name="fetch" style="background-color: rgb(0,105,169); color: white; border: none; padding: 10px 20px; cursor: pointer;">Fetch Details</button><br><br>
         </form>
         
@@ -44,18 +41,16 @@
 
 <?php
 $fetchedData = $block->getFetchedData();
-var_dump("Hello the user details"); exit;
-//var_dump($block->getFetchedData()); exit; 
-if (!empty($fetchedData)):{ ?>
+
+if (!empty($fetchedData)): ?>
     <h3>Fetched Data:</h3>
     <p><strong>Email:</strong> <?php echo htmlspecialchars($fetchedData['email']); ?></p>
     <p><strong>First Name:</strong> <?php echo htmlspecialchars($fetchedData['first_name']); ?></p>
     <p><strong>Last Name:</strong> <?php echo htmlspecialchars($fetchedData['last_name']); ?></p>
     <p><strong>School Name:</strong> <?php echo htmlspecialchars($fetchedData['school_name']); ?></p>
-<?php} else: {?>
+<?php else: ?>
     <p>No data found for the provided email.</p>
-<?php }endif; ?>
-
+<?php endif; ?>
 
 <head>
     <link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Custom_FormFetchPlugin::css/styles.css'); ?>">
