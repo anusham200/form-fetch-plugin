@@ -1,47 +1,20 @@
 <?php
 namespace Custom\FormFetchPlugin\Block;
 
-use Magento\Framework\View\Element\Template;
-use Magento\Framework\App\RequestInterface;
+use Magento\Backend\Block\Template;
 
 class Form extends Template
 {
-    protected $request;
-    protected $messageManager;
+    protected $_fetchedData = null;
 
-    public function __construct(
-        Template\Context $context,
-        RequestInterface $request,
-        \Magento\Framework\Message\ManagerInterface $messageManager,
-        array $data = []
-    ) {
-        $this->request = $request;
-        $this->messageManager = $messageManager;
-        parent::__construct($context, $data);
-    }
-
-    public function getFormActionUrl()
+    public function setFetchedData($data)
     {
-        return $this->getUrl('formfetch/actions/index');  // Adjust if necessary
+        $this->_fetchedData = $data;
+        return $this; // Return $this for chaining
     }
 
-    public function getFormKeyHtml()
+    public function getFetchedData()
     {
-        return $this->getLayout()->createBlock('Magento\Framework\View\Element\FormKey')->getFormKeyHtml();
+        return $this->_fetchedData;
     }
-
-    public function getSuccessMessage()
-{
-    $messages = $this->messageManager->getMessages()->getItems();
-
-    // Loop through messages and find the success message
-    foreach ($messages as $message) {
-        if ($message->getType() == \Magento\Framework\Message\MessageInterface::TYPE_SUCCESS) {
-            return $message->getText();
-        }
-    }
-
-    return ''; // Return empty string if no success message found
-}
-
 }
