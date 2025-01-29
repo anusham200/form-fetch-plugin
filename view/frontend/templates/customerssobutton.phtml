@@ -24,3 +24,32 @@
     </div>
 </div>
 
+<div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+    <div style="width: 48%; text-align: left; margin-top: -25px; margin-left: auto;">
+        
+        <form method="post" action="<?php echo $block->getUrl('formfetch/Block/FetchForm') ?>" style="text-align: left;">
+            <!-- Additional Email field for "Fetch" -->
+            <h3>Fetch Details</h3>
+            <label for="fetch_email">Fetch:</label><br>
+            <input type="email" id="fetch_email" name="fetch_email" placeholder="Enter email for fetch" style="border: 1px solid #ddd; padding: 8px; width: 100%;" required><br><br>
+            
+            <!-- Add form key for CSRF protection -->
+            <input type="hidden" name="form_key" value="<?php echo $block->getFormKey(); ?>" />
+            
+            <button type="submit" name="fetch" style="background-color: rgb(0,105,169); color: white; border: none; padding: 10px 20px; cursor: pointer;">Fetch Details</button><br><br>
+        </form>
+        
+    </div>
+</div>
+
+<?php if ($block->getFetchedData()): ?>
+    <h3>Fetched Data:</h3>
+    <p>Email: <?php echo $block->getFetchedData()['email']; ?></p>
+    <p>First Name: <?php echo $block->getFetchedData()['first_name']; ?></p>
+    <p>Last Name: <?php echo $block->getFetchedData()['last_name']; ?></p>
+    <p>School Name: <?php echo $block->getFetchedData()['school_name']; ?></p>
+<?php endif; ?>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Custom_FormFetchPlugin::css/styles.css'); ?>">
+</head>
