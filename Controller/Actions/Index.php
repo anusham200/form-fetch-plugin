@@ -74,12 +74,10 @@ class Index extends Action
             $block->setFetchedData($fetchedData); // Pass data to the block
         }
 
-         $resultRedirect = $this->resultRedirectFactory->create();
-    $resultRedirect->setPath('*/*/*');
-        return $resultRedirect;
-
         // Set the page title dynamically
         $resultPage->getConfig()->getTitle()->set(__('Frontend Form Fetch Plugin'));
+
+        var_dump($resultPage);exit();
 
         return $resultPage;
     }
