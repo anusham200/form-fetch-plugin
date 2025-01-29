@@ -51,13 +51,13 @@
 
 <?php
 $fetchedData = $block->getFetchedData();
-echo '<pre>';
-var_dump($fetchedData);
-echo '</pre>';
-exit();
 ?>
 
 <?php if (!empty($fetchedData)): ?>
+    echo '<pre>';
+var_dump($fetchedData);
+echo '</pre>';
+exit();
     <div>
     <h3>Fetched Data:</h3>
     <p><strong>Email:</strong> <?php echo htmlspecialchars($fetchedData['email']); ?></p>
