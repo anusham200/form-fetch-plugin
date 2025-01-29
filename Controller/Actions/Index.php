@@ -9,6 +9,10 @@ use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\App\ResourceConnection;
 use Custom\FormFetchPlugin\Block;
 
+use Magento\Framework\Session\SessionManagerInterface;
+
+protected $session;
+
 class Index extends Action
 {
     protected $resultPageFactory;
@@ -21,13 +25,15 @@ class Index extends Action
         PageFactory $resultPageFactory,
         RequestInterface $request,
         ManagerInterface $messageManager,
-        ResourceConnection $resource
+        ResourceConnection $resource,
+        SessionManagerInterface $session
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
         $this->request = $request;
         $this->messageManager = $messageManager;
         $this->resource = $resource;
+        $this->session = $session;
     }
 
     public function execute()
@@ -61,6 +67,8 @@ class Index extends Action
                     if (!$fetchedData) {
                         throw new \Exception(__('No data found for the provided email.'));
                     }
+
+                    $this->session->setFetchedData($fetchedData);
 
                     $this->messageManager->addSuccessMessage(__('Data fetched successfully.'));
                 }
