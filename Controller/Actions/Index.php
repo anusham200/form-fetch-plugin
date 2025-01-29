@@ -60,7 +60,7 @@ class Index extends Action
 
                     // Fetch data from the database
                     $fetchedData = $this->fetchFromDatabase($params['fetch_email']);
-                    var_dump ($fetchedData);exit;
+                    var_dump($fetchedData);exit;
                     if (!$fetchedData) {
                         throw new \Exception(__('No data found for the provided email.'));
                     }
