@@ -59,7 +59,7 @@ class Index extends Action
                         throw new \Exception(__('No data found for the provided email.'));
                     }
 
-                    $message = __('Data fetched successfully') . 'for'
+                    $message = __('Data fetched successfully  ') . 'for'
                     . "Email: " . htmlspecialchars($fetchedData['email']) . "->"
                     . "First Name: " . htmlspecialchars($fetchedData['first_name']) . "->"
                     . "Last Name: " . htmlspecialchars($fetchedData['last_name']) . "->"
