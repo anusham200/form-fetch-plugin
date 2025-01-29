@@ -3,7 +3,7 @@ namespace Custom\FormFetchPlugin\Block;
 
 use Magento\Backend\Block\Template;
 
-class Form extends Template
+class FetchForm extends Template
 {
     protected $_fetchedData = null;
 
