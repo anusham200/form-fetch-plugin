@@ -14,13 +14,11 @@ class Form extends Template
     protected $request;
     protected $messageManager;
     protected $_fetchedData = null;
-    public $session;
 
     public function __construct(
         Template\Context $context,
         RequestInterface $request,
         ManagerInterface $messageManager,
-        SessionManagerInterface $session,
         array $data = []
     ) {
         $this->request = $request;
@@ -82,6 +80,6 @@ class Form extends Template
      */
     public function getFetchedData()
     {
-        return $this->session->_fetchedData;
+        return $this->_fetchedData;
     }
 }
