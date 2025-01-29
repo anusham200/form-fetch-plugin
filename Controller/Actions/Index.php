@@ -60,12 +60,23 @@ class Index extends Action
 
                     // Fetch data from the database
                     $fetchedData = $this->fetchFromDatabase($params['fetch_email']);
-                    var_dump($fetchedData);exit;
+                    
                     if (!$fetchedData) {
                         throw new \Exception(__('No data found for the provided email.'));
                     }
 
                     $this->messageManager->addSuccessMessage(__('Data fetched successfully.'));
+                    <?php 
+$fetchedData = $block->getFetchedData();
+if (!empty($fetchedData)): ?>
+    <h3>Fetched Data:</h3>
+    <p><strong>Email:</strong> <?php echo htmlspecialchars($fetchedData['email']); ?></p>
+    <p><strong>First Name:</strong> <?php echo htmlspecialchars($fetchedData['first_name']); ?></p>
+    <p><strong>Last Name:</strong> <?php echo htmlspecialchars($fetchedData['last_name']); ?></p>
+    <p><strong>School Name:</strong> <?php echo htmlspecialchars($fetchedData['school_name']); ?></p>
+<?php else: ?>
+    <p>No data found for the provided email.</p>
+<?php endif; ?>
                 }
             } catch (\Exception $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
