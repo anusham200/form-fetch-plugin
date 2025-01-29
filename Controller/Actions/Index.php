@@ -68,7 +68,8 @@ class Index extends Action
 
         // Pass fetched data to the result page and block
         $resultPage = $this->resultPageFactory->create();
-        $block = $resultPage->getLayout()->getBlock('formfetch_block'); // Ensure block name matches
+        $block = $resultPage->getLayout()->getBlock('custom.formfetchplugin.form');
+ // Ensure block name matches
 
         if ($block) {
             $block->setFetchedData($fetchedData); // Pass data to the block
