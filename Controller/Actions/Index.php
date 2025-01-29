@@ -56,9 +56,11 @@ class Index extends Action
                     if (empty($params['fetch_email'])) {
                         throw new \Exception(__('Email is required to fetch details.'));
                     }
+                    
 
                     // Fetch data from the database
                     $fetchedData = $this->fetchFromDatabase($params['fetch_email']);
+                    echo $fetchedData;exit;
                     if (!$fetchedData) {
                         throw new \Exception(__('No data found for the provided email.'));
                     }
