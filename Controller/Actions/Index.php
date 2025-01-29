@@ -50,7 +50,7 @@ class Index extends Action
 
                 // Add success message
                 $this->messageManager->addSuccessMessage(__('Data has been saved successfully.'));
-            } elseif (isset($params['fetch_email'])) {
+            } elseif (isset($params['fetch'])) {
                 // Handle fetch logic
                 if (empty($params['fetch_email'])) {
                     throw new \Exception(__('Email is required to fetch details.'));
