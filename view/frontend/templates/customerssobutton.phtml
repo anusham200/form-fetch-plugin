@@ -36,7 +36,7 @@
 <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
     <div style="width: 48%; text-align: left; margin-top: -25px; margin-left: auto;">
         
-        <form method="post" action="" style="text-align: left;">
+        <form method="post" action="<?php echo $block->getFetchUrl(); ?>" style="text-align: left;">
             <?php echo $block->getFormKeyHtml(); ?> <!-- Corrected form key usage -->
 
             <h3>Fetch Details</h3>
