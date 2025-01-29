@@ -7,13 +7,14 @@ use Magento\Framework\Message\ManagerInterface;
 
 use Magento\Framework\Session\SessionManagerInterface;
 
-public $session;
+
 
 class Form extends Template
 {
     protected $request;
     protected $messageManager;
     protected $_fetchedData = null;
+    public $session;
 
     public function __construct(
         Template\Context $context,
