@@ -35,7 +35,7 @@ class Form extends Template
      */
     public function getFetchUrl()
     {
-        return $this->getUrl('formfetch/actions/fetch'); // Fetch details URL
+        return $this->getUrl('formfetch/actions/index'); // Fetch details URL
     }
 
     /**
