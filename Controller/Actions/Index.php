@@ -115,7 +115,7 @@ class Index extends Action
     /**
      * Fetch data from the database based on email
      */
-    private function fetchFromDatabase($email)
+    public function fetchFromDatabase($email)
     {
         $connection = $this->resource->getConnection();
         $tableName = $this->resource->getTableName('form_fetch_plugin_data'); // Your table name
