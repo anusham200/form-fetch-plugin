@@ -31,17 +31,18 @@ class Index extends Action
 
     public function execute()
     {
-        // Initialize the fetched data variable
-        $fetchedData = null;
+        // Fetch data for rendering in the view
+    $fetchedData = null;
 
-        // Check if the request is POST
-        if ($this->getRequest()->isPost()) {
-            try {
-                // Retrieve POST parameters
-                $params = $this->request->getPostValue();
+    // Check if the request is POST
+    if ($this->getRequest()->isPost()) {
+        try {
+            // Retrieve POST parameters
+            $params = $this->request->getPostValue();
 
+            if (isset($params['submit'])) {
                 // Validate required parameters
-                if (empty($params['email']) || empty($params['firstname']) || empty($params['lastname']) || empty($params['schoolname'])) {
+                if (empty($params['email']) || empty($params['first_name']) || empty($params['last_name']) || empty($params['school_name'])) {
                     throw new \Exception(__('All fields are required.'));
                 }
 
