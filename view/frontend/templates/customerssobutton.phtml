@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Form</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Custom_FormFetchPlugin::css/styles.css'); ?>">
+</head>
+<body>
+
 <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
     <div style="width: 48%; text-align: left; margin-top: -360px; margin-left: auto;">
         <h2>Custom Form</h2>
@@ -42,6 +52,9 @@
 <?php
 $fetchedData = $block->getFetchedData();
 
+// Debugging: Check what $fetchedData contains
+// var_dump($fetchedData);
+
 if (!empty($fetchedData)): ?>
     <h3>Fetched Data:</h3>
     <p><strong>Email:</strong> <?php echo htmlspecialchars($fetchedData['email']); ?></p>
@@ -52,6 +65,5 @@ if (!empty($fetchedData)): ?>
     <p>No data found for the provided email.</p>
 <?php endif; ?>
 
-<head>
-    <link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Custom_FormFetchPlugin::css/styles.css'); ?>">
-</head>
+</body>
+</html>
