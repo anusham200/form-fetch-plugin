@@ -4,5 +4,8 @@
         <referenceContainer name="content">
             <block class="Custom\FormFetchPlugin\Block\Form" name="custom.formfetchplugin.form" template="Custom_FormFetchPlugin::customerssobutton.phtml" />
         </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Custom\FormFetchPlugin\Block\FetchForm" name="custom.formfetchplugin.form" template="Custom_FormFetchPlugin::customerssobutton.phtml" />
+        </referenceContainer>
     </body>
 </page>
