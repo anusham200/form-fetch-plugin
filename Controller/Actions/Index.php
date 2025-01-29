@@ -80,7 +80,7 @@ class Index extends Action
 
         // Pass fetched data to the result page and block
         $resultPage = $this->resultPageFactory->create();
-        $block = $resultPage->getLayout()->getBlock('custom.formfetchplugin.form');
+        $block = $resultPage->getLayout()->getBlock('customer_account_login');
 
         if ($block) {
             $block->setFetchedData($fetchedData); // Pass data to the block
