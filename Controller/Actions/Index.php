@@ -11,7 +11,7 @@ use Custom\FormFetchPlugin\Block;
 
 use Magento\Framework\Session\SessionManagerInterface;
 
-protected $session;
+
 
 class Index extends Action
 {
@@ -19,6 +19,7 @@ class Index extends Action
     protected $request;
     protected $messageManager;
     protected $resource;
+    protected $session;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
