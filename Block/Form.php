@@ -77,6 +77,7 @@ class Form extends Template
      */
     public function getFetchedData()
     {
-        return $this->_fetchedData;
+    return $this->_fetchedData;
     }
+
 }
