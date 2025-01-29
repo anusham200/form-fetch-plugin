@@ -54,11 +54,13 @@ $fetchedData = $block->getFetchedData();
 ?>
 
 <?php if (!empty($fetchedData)): ?>
+    <div>
     <h3>Fetched Data:</h3>
     <p><strong>Email:</strong> <?php echo htmlspecialchars($fetchedData['email']); ?></p>
     <p><strong>First Name:</strong> <?php echo htmlspecialchars($fetchedData['first_name']); ?></p>
     <p><strong>Last Name:</strong> <?php echo htmlspecialchars($fetchedData['last_name']); ?></p>
     <p><strong>School Name:</strong> <?php echo htmlspecialchars($fetchedData['school_name']); ?></p>
+        </div>
 <?php else: ?>
     <p>No data found for the provided email.</p>
 <?php endif; ?>
