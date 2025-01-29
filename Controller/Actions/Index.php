@@ -7,8 +7,6 @@ use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\App\ResourceConnection;
-use Custom\FormFetchPlugin\Block;
-
 
 class Index extends Action
 {
@@ -33,13 +31,10 @@ class Index extends Action
 
     public function execute()
     {
-        // Initialize fetched data variable
-        $fetchedData = null;
+        $fetchedData = null; // Initialize fetched data
 
-        // Check if the request is POST
         if ($this->getRequest()->isPost()) {
             try {
-                // Retrieve POST parameters
                 $params = $this->request->getPostValue();
 
                 if (isset($params['submit'])) {
@@ -56,11 +51,10 @@ class Index extends Action
                     if (empty($params['fetch_email'])) {
                         throw new \Exception(__('Email is required to fetch details.'));
                     }
-                    
 
                     // Fetch data from the database
                     $fetchedData = $this->fetchFromDatabase($params['fetch_email']);
-                    
+
                     if (!$fetchedData) {
                         throw new \Exception(__('No data found for the provided email.'));
                     }
@@ -74,7 +68,7 @@ class Index extends Action
 
         // Pass fetched data to the result page and block
         $resultPage = $this->resultPageFactory->create();
-        $block = $resultPage->getLayout()->getBlock('customer_account_login');
+        $block = $resultPage->getLayout()->getBlock('formfetch_block'); // Ensure block name matches
 
         if ($block) {
             $block->setFetchedData($fetchedData); // Pass data to the block
