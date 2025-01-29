@@ -1,7 +1,7 @@
 <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
     <div style="width: 48%; text-align: left; margin-top: -25px; margin-left: auto;">
         
-        <form method="post" action="/Block/FetchForm" style="text-align: left;">
+        <form method="post" action="<?php echo $block->getUrl('formfetch/Block/FetchForm') ?>" style="text-align: left;">
             <!-- Additional Email field for "Fetch" -->
             <h3>Fetch Details</h3>
             <label for="fetch_email">Fetch:</label><br>
