@@ -37,12 +37,12 @@
     <div style="width: 48%; text-align: left; margin-top: -25px; margin-left: auto;">
         
         <form method="post" action="<?php echo $block->getFetchUrl(); ?>" style="text-align: left;">
+            <?php echo $block->getFormKeyHtml(); ?> <!-- Corrected form key usage -->
+
             <h3>Fetch Details</h3>
             <label for="fetch_email">Fetch:</label><br>
             <input type="email" id="fetch_email" name="fetch_email" placeholder="Enter email for fetch" style="border: 1px solid #ddd; padding: 8px; width: 100%;" required><br><br>
             
-            <?php echo $block->getFormKeyHtml(); ?> <!-- Corrected form key usage -->
-
             <button type="submit" name="fetch" style="background-color: rgb(0,105,169); color: white; border: none; padding: 10px 20px; cursor: pointer;">Fetch Details</button><br><br>
         </form>
         
@@ -51,11 +51,9 @@
 
 <?php
 $fetchedData = $block->getFetchedData();
+?>
 
-// Debugging: Check what $fetchedData contains
-// var_dump($fetchedData);
-
-if (!empty($fetchedData)): ?>
+<?php if (!empty($fetchedData)): ?>
     <h3>Fetched Data:</h3>
     <p><strong>Email:</strong> <?php echo htmlspecialchars($fetchedData['email']); ?></p>
     <p><strong>First Name:</strong> <?php echo htmlspecialchars($fetchedData['first_name']); ?></p>
