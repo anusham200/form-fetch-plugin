@@ -7,6 +7,7 @@ use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\App\ResourceConnection;
+use Custom\FormFetchPlugin\Block;
 
 class Index extends Action
 {
