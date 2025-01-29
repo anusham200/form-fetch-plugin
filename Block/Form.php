@@ -7,7 +7,7 @@ use Magento\Framework\Message\ManagerInterface;
 
 use Magento\Framework\Session\SessionManagerInterface;
 
-protected $session;
+public $session;
 
 class Form extends Template
 {
