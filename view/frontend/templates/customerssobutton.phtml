@@ -41,3 +41,15 @@
         
     </div>
 </div>
+
+<?php if ($block->getFetchedData()): ?>
+    <h3>Fetched Data:</h3>
+    <p>Email: <?php echo $block->getFetchedData()['email']; ?></p>
+    <p>First Name: <?php echo $block->getFetchedData()['first_name']; ?></p>
+    <p>Last Name: <?php echo $block->getFetchedData()['last_name']; ?></p>
+    <p>School Name: <?php echo $block->getFetchedData()['school_name']; ?></p>
+<?php endif; ?>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Custom_FormFetchPlugin::css/styles.css'); ?>">
+</head>
