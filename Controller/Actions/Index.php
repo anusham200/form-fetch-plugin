@@ -63,8 +63,6 @@ class Index extends Action
                         throw new \Exception(__('No data found for the provided email.'));
                     }
 
-                    $this->setFetchedData($fetchedData);
-
                     $this->messageManager->addSuccessMessage(__('Data fetched successfully.'));
                 }
             } catch (\Exception $e) {
