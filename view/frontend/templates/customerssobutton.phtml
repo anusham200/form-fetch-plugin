@@ -44,7 +44,7 @@
 
 <?php 
 $fetchedData = $block->getFetchedData();
-$this->session->setFetchedData(null);
+$block->session->setFetchedData(null);
 if (!empty($fetchedData)): ?>
     <h3>Fetched Data:</h3>
     <p><strong>Email:</strong> <?php echo htmlspecialchars($fetchedData['email']); ?></p>
