@@ -5,6 +5,10 @@ use Magento\Framework\View\Element\Template;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface;
 
+use Magento\Framework\Session\SessionManagerInterface;
+
+protected $session;
+
 class Form extends Template
 {
     protected $request;
@@ -15,6 +19,7 @@ class Form extends Template
         Template\Context $context,
         RequestInterface $request,
         ManagerInterface $messageManager,
+        SessionManagerInterface $session,
         array $data = []
     ) {
         $this->request = $request;
@@ -76,6 +81,6 @@ class Form extends Template
      */
     public function getFetchedData()
     {
-        return $this->_fetchedData;
+        return $this->session->_fetchedData;
     }
 }
