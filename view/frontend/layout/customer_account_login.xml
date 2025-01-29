@@ -6,11 +6,5 @@
             <block class="Custom\FormFetchPlugin\Block\Form" 
                    name="custom.formfetchplugin.form" 
                    template="Custom_FormFetchPlugin::customerssobutton.phtml" />
-
-            <!-- Second Block (Different Template) -->
-            <block class="Custom\FormFetchPlugin\Block\FetchForm" 
-                   name="custom.formfetchplugin.fetchform" 
-                   template="Custom_FormFetchPlugin::formfetch.phtml" /> 
-        </referenceContainer>
     </body>
 </page>
