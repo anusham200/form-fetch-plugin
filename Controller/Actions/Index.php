@@ -29,67 +29,61 @@ class Index extends Action
         $this->resource = $resource;
     }
 
-   public function execute()
-{
-    // Fetch data for rendering in the view
-    $fetchedData = null;
+    public function execute()
+    {
+        // Initialize fetched data variable
+        $fetchedData = null;
 
-    // Check if the request is POST
-    if ($this->getRequest()->isPost()) {
-        try {
-            // Retrieve POST parameters
-            $params = $this->request->getPostValue();
+        // Check if the request is POST
+        if ($this->getRequest()->isPost()) {
+            try {
+                // Retrieve POST parameters
+                $params = $this->request->getPostValue();
 
-            if (isset($params['submit'])) {
-                // Validate required parameters
-                if (empty($params['email']) || empty($params['firstname']) || empty($params['lastname']) || empty($params['schoolname'])) {
-                    throw new \Exception(__('All fields are required.'));
+                if (isset($params['submit'])) {
+                    // Handle form submission
+                    if (empty($params['email']) || empty($params['firstname']) || empty($params['lastname']) || empty($params['schoolname'])) {
+                        throw new \Exception(__('All fields are required.'));
+                    }
+
+                    // Save data to database
+                    $this->saveToDatabase($params);
+                    $this->messageManager->addSuccessMessage(__('Data has been saved successfully.'));
+                } elseif (isset($params['fetch'])) {
+                    // Handle data fetch
+                    if (empty($params['fetch_email'])) {
+                        throw new \Exception(__('Email is required to fetch details.'));
+                    }
+
+                    // Fetch data from the database
+                    $fetchedData = $this->fetchFromDatabase($params['fetch_email']);
+                    if (!$fetchedData) {
+                        throw new \Exception(__('No data found for the provided email.'));
+                    }
+
+                    $this->messageManager->addSuccessMessage(__('Data fetched successfully.'));
                 }
-
-                // Save data to the database
-                $this->saveToDatabase($params);
-
-                // Add success message
-                $this->messageManager->addSuccessMessage(__('Data has been saved successfully.'));
-            } elseif (isset($params['fetch'])) {
-                // Handle fetch logic
-                if (empty($params['fetch_email'])) {
-                    throw new \Exception(__('Email is required to fetch details.'));
-                }
-
-                // Fetch data based on email
-                $fetchedData = $this->fetchFromDatabase($params['fetch_email']);
-                if (!$fetchedData) {
-                    throw new \Exception(__('No data found for the provided email.'));
-                }
-
-                $this->messageManager->addSuccessMessage(__('Data fetched successfully.'));
+            } catch (\Exception $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
             }
-        } catch (\Exception $e) {
-            // Add error message
-            $this->messageManager->addErrorMessage($e->getMessage());
         }
+
+        // Pass fetched data to the result page and block
+        $resultPage = $this->resultPageFactory->create();
+        $block = $resultPage->getLayout()->getBlock('formfetch_form_index');
+
+        if ($block) {
+            $block->setFetchedData($fetchedData); // Pass data to the block
+        }
+
+        // Set the page title dynamically
+        $resultPage->getConfig()->getTitle()->set(__('Frontend Form Fetch Plugin'));
+
+        return $resultPage;
     }
-
-    // Pass fetched data to the result page and block
-    $resultPage = $this->resultPageFactory->create();
-    $block = $resultPage->getLayout()->getBlock('formfetch_form_index');
-    if ($block) {
-        $block->setFetchedData($fetchedData); // Pass fetched data to the block
-    }
-
-    // Set the page title dynamically
-    $resultPage->getConfig()->getTitle()->set(__('Frontend Form Fetch Plugin'));
-
-    return $resultPage;
-}
-
 
     /**
      * Save data to the database
-     *
-     * @param array $params
-     * @throws \Exception
      */
     private function saveToDatabase($params)
     {
@@ -97,9 +91,9 @@ class Index extends Action
         $tableName = $this->resource->getTableName('form_fetch_plugin_data'); // Your table name
 
         $data = [
-            'email' => $params['email'],
-            'first_name' => $params['firstname'],
-            'last_name' => $params['lastname'],
+            'email'       => $params['email'],
+            'first_name'  => $params['firstname'],
+            'last_name'   => $params['lastname'],
             'school_name' => $params['schoolname'],
         ];
 
@@ -117,6 +111,19 @@ class Index extends Action
             $connection->insert($tableName, $data);
         }
     }
+
+    /**
+     * Fetch data from the database based on email
+     */
+    private function fetchFromDatabase($email)
+    {
+        $connection = $this->resource->getConnection();
+        $tableName = $this->resource->getTableName('form_fetch_plugin_data'); // Your table name
+
+        // Fetch data
+        $query = "SELECT * FROM $tableName WHERE email = :email";
+        $fetchedData = $connection->fetchRow($query, ['email' => $email]);
+
+        return $fetchedData ?: null;
+    }
 }
-
-
